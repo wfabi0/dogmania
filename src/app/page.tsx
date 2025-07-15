@@ -74,13 +74,13 @@ const currencyFormatter = new Intl.NumberFormat("pt-BR", {
 
 export default function Home() {
   return (
-    <div className="w-screen min-h-screen bg-white text-black">
+    <div className="w-screen min-h-screen bg-white text-black overflow-x-hidden">
       <NavBar />
 
-      <div className="px-36 py-24">
-        <div className="grid grid-cols-2">
-          <div className="pt-10">
-            <div className="text-4xl font-semibold tracking-wider">
+      <div className="px-6 sm:px-12 md:px-24 lg:px-36 py-12 md:py-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="pt-0 md:pt-10 text-center md:text-left">
+            <div className="text-3xl md:text-4xl font-semibold tracking-wider">
               <div>
                 <span className="text-primary">Tudo</span>{" "}
                 <span>para seu cão</span>
@@ -91,7 +91,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="text-zinc-600 mt-12 mb-5">
+            <div className="text-zinc-600 mt-8 md:mt-12 mb-5">
               Uma loja online dedicada a proporcionar diversão e estilo para os
               adoráveis membros peludos de sua família. Navegue por nossa
               extensa coleção de brinquedos, acessórios e roupas. Vamos ajudar
@@ -99,7 +99,7 @@ export default function Home() {
               pets.
             </div>
 
-            <div className="space-x-4">
+            <div className="space-x-4 flex justify-center md:justify-start">
               <Button
                 href="/loja"
                 className="p-2 px-5 bg-primary rounded-2xl text-white"
@@ -111,20 +111,20 @@ export default function Home() {
               </Button>
             </div>
           </div>
-          <div className="relative flex items-start justify-center w-full h-full -mt-8">
+          <div className="relative flex items-start justify-center w-full h-full mt-8 md:-mt-8">
             <Image
               src="/DogPrincipal.png"
               alt="Cachorro com brinquedo"
               width={450}
               height={500}
-              className="object-contain"
+              className="object-contain w-[300px] h-auto md:w-[450px]"
               priority
             />
           </div>
         </div>
       </div>
 
-      <div className="flex justify-between gap-8 bg-primary px-12 mx-24 rounded-4xl -mt-14 shadow-lg">
+      <div className="flex flex-col md:flex-row justify-center md:justify-between gap-8 bg-primary px-6 md:px-12 mx-6 md:mx-24 rounded-4xl -mt-8 md:-mt-14 shadow-lg items-stretch">
         {cards.map((i, index) => (
           <Card
             key={index}
@@ -139,7 +139,7 @@ export default function Home() {
         ))}
       </div>
 
-      <div className="relative px-24 mt-14 w-full">
+      <div className="relative px-6 sm:px-12 md:px-24 mt-14 w-full">
         <div
           className="absolute inset-x-0 top-0 h-10 z-20 pointer-events-none"
           style={{
@@ -149,13 +149,13 @@ export default function Home() {
         />
         <div
           className="absolute inset-0 bg-[url('/background.png')] bg-repeat bg-center bg-contain opacity-15 z-0"
-          style={{ backgroundSize: "500px 260px" }}
+          style={{ backgroundSize: "300px 156px" }}
         />
 
         <div className="py-10 relative z-10">
-          <div className="flex flex-row items-center mb-4 justify-between w-full px-10">
-            <div className="flex flex-col items-start w-fit px-2">
-              <span className="flex gap-x-2 items-center text-4xl font-semibold">
+          <div className="flex flex-col sm:flex-row items-center mb-4 justify-between w-full px-2 sm:px-10">
+            <div className="flex flex-col items-center sm:items-start w-fit px-2 mb-4 sm:mb-0">
+              <span className="flex gap-x-2 items-center text-3xl md:text-4xl font-semibold text-center">
                 <PawPrint size={40} fill="black" />
                 Mais Vendidos
               </span>
@@ -165,28 +165,31 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="max-w-4xl mx-auto pb-24">
+        <div className="max-w-full sm:max-w-xl md:max-w-2xl lg:max-w-4xl xl:max-w-6xl mx-auto pb-24">
           <Carousel>
             <CarouselContent>
               {produtos.map((produto, idx) => {
                 const currencyFormat = currencyFormatter.format(produto.preco);
                 return (
-                  <CarouselItem key={idx} className="basis-1/4">
-                    <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center justify-between h-auto min-h-[220px]">
+                  <CarouselItem
+                    key={idx}
+                    className="basis-1/2 sm:basis-1/3 lg:basis-1/4"
+                  >
+                    <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 flex flex-col items-center justify-between h-auto min-h-[220px]">
                       <Image
                         src={produto.image}
                         alt={produto.nome}
                         width={120}
                         height={120}
-                        className="rounded-xl object-cover mb-2"
+                        className="rounded-xl object-cover mb-2 w-24 h-24 sm:w-32 sm:h-32"
                       />
                       <div className="text-sm font-medium text-black mb-1 text-center">
                         {produto.nome}
                       </div>
-                      <div className="text-xl mb-2 text-center">
+                      <div className="text-lg sm:text-xl mb-2 text-center">
                         {currencyFormat}
                       </div>
-                      <Button className="bg-primary text-white px-4 py-2 rounded-xl w-full mt-2">
+                      <Button className="bg-primary text-white px-4 py-2 rounded-xl w-full mt-2 text-sm sm:text-base">
                         Carrinho
                       </Button>
                     </div>
@@ -194,8 +197,8 @@ export default function Home() {
                 );
               })}
             </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
+            <CarouselPrevious className="hidden sm:inline-flex" />
+            <CarouselNext className="hidden sm:inline-flex" />
           </Carousel>
         </div>
       </div>

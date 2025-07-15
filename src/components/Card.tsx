@@ -24,7 +24,7 @@ export default function Card({
 }: CardProps) {
   return (
     <div
-      className="bg-[#f0f0f0] rounded-2xl shadow-xl p-8 w-1/3 -translate-y-10 hover:-translate-y-16 transition-transform duration-300 border border-zinc-100 flex flex-col items-center"
+      className="bg-[#f0f0f0] rounded-2xl shadow-xl p-8 w-full md:w-1/3 -translate-y-10 hover:-translate-y-12 md:hover:-translate-y-16 transition-transform duration-300 border border-zinc-100 flex flex-col items-center"
       style={{
         zIndex: typeof index === "number" && !isNaN(index) ? 10 - index : 0,
       }}
