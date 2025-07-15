@@ -1,12 +1,20 @@
+import { PawPrint } from "lucide-react";
 import Image from "next/image";
-import Button from "./components/Button";
-import Card, { CardProps } from "./components/Card";
-import NavBar from "./components/NavBar";
+import Button from "../components/Button";
+import Card, { CardProps } from "../components/Card";
+import NavBar from "../components/NavBar";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "../components/ui/carousel";
 
-const cards: Omit<CardProps, "key">[] = [
+const cards: Omit<CardProps, "index">[] = [
   {
-    imageSrcLeft: "/card1a.png",
-    imageSrcRight: "/card1b.png",
+    imageSrcLeft: "/halloween.jpg",
+    imageSrcRight: "/halloween-2.jpg",
     title: "Especial Halloween!",
     description:
       "Fantasias, acessórios dentre outros itens para deixar seu pet no clima do Halloween.",
@@ -14,8 +22,8 @@ const cards: Omit<CardProps, "key">[] = [
     button: "Ver itens",
   },
   {
-    imageSrcLeft: "/card2a.png",
-    imageSrcRight: "/card2b.png",
+    imageSrcLeft: "/mordendo-bolinha.jpg",
+    imageSrcRight: "/melhor-brinquedo-para-cachorro-hiperativo-2-.png",
     title: "Novos brinquedos",
     description:
       "Adicionamos mais opções de brinquedos para diversão de seu pet!",
@@ -23,8 +31,7 @@ const cards: Omit<CardProps, "key">[] = [
     button: "Novidades",
   },
   {
-    imageSrcLeft: "/card3a.png",
-    imageSrcRight: "/card3b.png",
+    imageSrcLeft: "/cachorro-gravata.jpg",
     title: "Avaliações de clientes",
     description:
       "Veja a opinião de nossos clientes sobre os produtos e serviços oferecidos.",
@@ -33,10 +40,43 @@ const cards: Omit<CardProps, "key">[] = [
   },
 ] as const;
 
+const produtos = [
+  {
+    image: "/produto1.jpg",
+    nome: "Brinquedo Mordedor",
+    descricao: "Ideal para cães ativos e brincalhões.",
+    preco: 39.9,
+  },
+  {
+    image: "/produto2.jpg",
+    nome: "Coleira Fashion",
+    descricao: "Estilo e conforto para seu pet.",
+    preco: 29.9,
+  },
+  {
+    image: "/produto3.jpg",
+    nome: "Cama Macia",
+    descricao: "Descanso garantido para seu cão.",
+    preco: 99.9,
+  },
+  {
+    image: "/produto4.png",
+    nome: "Petisco Natural",
+    descricao: "Saudável e saboroso.",
+    preco: 19.9,
+  },
+];
+
+const currencyFormatter = new Intl.NumberFormat("pt-BR", {
+  style: "currency",
+  currency: "BRL",
+});
+
 export default function Home() {
   return (
-    <div className="w-screen min-h-screen bg-white text-black pb-10">
+    <div className="w-screen min-h-screen bg-white text-black">
       <NavBar />
+
       <div className="px-36 py-24">
         <div className="grid grid-cols-2">
           <div className="pt-10">
@@ -83,10 +123,12 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="flex justify-between gap-8 bg-primary px-12 mx-24 rounded-4xl -mt-14">
+
+      <div className="flex justify-between gap-8 bg-primary px-12 mx-24 rounded-4xl -mt-14 shadow-lg">
         {cards.map((i, index) => (
           <Card
             key={index}
+            index={index}
             button={i.button}
             imageSrcLeft={i.imageSrcLeft}
             imageSrcRight={i.imageSrcRight}
@@ -95,6 +137,81 @@ export default function Home() {
             link={i.link}
           />
         ))}
+      </div>
+
+      <div className="relative px-24 mt-14 w-full">
+        <div
+          className="absolute inset-x-0 top-0 h-10 z-20 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0))",
+          }}
+        />
+        <div
+          className="absolute inset-0 bg-[url('/background.png')] bg-repeat bg-center bg-contain opacity-15 z-0"
+          style={{ backgroundSize: "500px 260px" }}
+        />
+
+        <div className="py-10 relative z-10">
+          <div className="flex flex-row items-center mb-4 justify-between w-full px-10">
+            <div className="flex flex-col items-start w-fit px-2">
+              <span className="flex gap-x-2 items-center text-4xl font-semibold">
+                <PawPrint size={40} fill="black" />
+                Mais Vendidos
+              </span>
+              <div className="mt-1 w-full h-1.5 bg-orange-500 rounded-full" />
+            </div>
+            <Button href="/mais-vendidos">Ver tudo</Button>
+          </div>
+        </div>
+
+        <div className="max-w-4xl mx-auto pb-24">
+          <Carousel>
+            <CarouselContent>
+              {produtos.map((produto, idx) => {
+                const currencyFormat = currencyFormatter.format(produto.preco);
+                return (
+                  <CarouselItem key={idx} className="basis-1/4">
+                    <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center justify-between h-auto min-h-[220px]">
+                      <Image
+                        src={produto.image}
+                        alt={produto.nome}
+                        width={120}
+                        height={120}
+                        className="rounded-xl object-cover mb-2"
+                      />
+                      <div className="text-sm font-medium text-black mb-1 text-center">
+                        {produto.nome}
+                      </div>
+                      <div className="text-xl mb-2 text-center">
+                        {currencyFormat}
+                      </div>
+                      <Button className="bg-primary text-white px-4 py-2 rounded-xl w-full mt-2">
+                        Carrinho
+                      </Button>
+                    </div>
+                  </CarouselItem>
+                );
+              })}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+        </div>
+      </div>
+
+      <div className="bg-primary w-full flex justify-center items-center py-1">
+        <span className="text-white text-lg">
+          Criado por{" "}
+          <a
+            href="https://github.com/wfabi0"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline font-semibold hover:text-orange-200 transition"
+          >
+            wfabi0
+          </a>
+        </span>
       </div>
     </div>
   );
