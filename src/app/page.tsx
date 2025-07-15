@@ -203,7 +203,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="bg-primary w-full flex justify-center items-center py-1">
+      <div className="bg-primary w-full flex justify-center items-center py-2 px-4 text-center">
         <span className="text-white text-lg">
           Criado por{" "}
           <a
@@ -213,6 +213,17 @@ export default function Home() {
             className="underline font-semibold hover:text-orange-200 transition"
           >
             wfabi0
+          </a>
+          <span className="hidden sm:inline"> | </span>
+          <br className="sm:hidden" />
+          Prototipagem por{" "}
+          <a
+            href="https://github.com/ph-santos0"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline font-semibold hover:text-orange-200 transition"
+          >
+            ph-santos0
           </a>
         </span>
       </div>
