@@ -2,7 +2,6 @@
 
 Bem-vindo ao DogMania! Uma loja online fictícia dedicada a proporcionar diversão, estilo e conforto para os membros peludos de sua família. Este projeto foi desenvolvido com Next.js e Tailwind CSS, focado em uma experiência de usuário moderna e responsiva.
 
-
 ## 🚀 Tecnologias Utilizadas
 
 - [Next.js](https://nextjs.org/) - O Framework React para a Web.
@@ -17,12 +16,14 @@ Bem-vindo ao DogMania! Uma loja online fictícia dedicada a proporcionar divers�
 Para rodar este projeto localmente, siga os passos abaixo:
 
 1.  **Clone o repositório:**
+
     ```bash
     git clone https://github.com/wfabi0/dogmania.git
     cd dogmania
     ```
 
 2.  **Instale as dependências:**
+
     ```bash
     npm install
     # ou
@@ -41,10 +42,6 @@ Para rodar este projeto localmente, siga os passos abaixo:
     ```
 
 Abra [http://localhost:3000](http://localhost:3000) no seu navegador para ver o resultado.
-
-## 👤 Autor
-
-- **Fábio** - [wfabi0](https://github.com/wfabi0)
 
 ## ✨ Créditos
 
