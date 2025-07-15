@@ -175,7 +175,7 @@ export default function Home() {
                     key={idx}
                     className="basis-1/2 sm:basis-1/3 lg:basis-1/4"
                   >
-                    <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 flex flex-col items-center justify-between h-auto min-h-[220px]">
+                    <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 flex flex-col items-center justify-between h-full min-h-[220px]">
                       <Image
                         src={produto.image}
                         alt={produto.nome}
